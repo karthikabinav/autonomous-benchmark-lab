@@ -1,0 +1,14 @@
+{
+  "name": "abl-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "refresh": "node scripts/refresh-snapshot.mjs",
+    "build": "node -e \"console.log('static build: using committed snapshot')\"", 
+    "start": "npx serve public -l 4173"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

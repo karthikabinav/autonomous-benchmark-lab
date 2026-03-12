@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABL Dashboard</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:#0b1020;color:#e6e9f2;margin:0;padding:24px}
+    h1,h2{margin:0 0 8px}
+    .muted{color:#9aa4c7}
+    .grid{display:grid;gap:12px}
+    .grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+    .card{background:#121a33;border:1px solid #25325d;border-radius:12px;padding:14px}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#1d2a52;color:#b8c6ff;font-size:12px;margin-right:6px}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{border-bottom:1px solid #243157;padding:7px;text-align:left;vertical-align:top}
+    .ok{color:#49d17d}.warn{color:#ffc857}.bad{color:#ff6b6b}
+    pre{white-space:pre-wrap;background:#0d1530;padding:10px;border-radius:8px;max-height:220px;overflow:auto}
+  </style>
+</head>
+<body>
+  <h1>Autonomous Benchmark Discovery Lab — Exec Dashboard</h1>
+  <div class="muted" id="updated"></div>
+  <div class="grid grid-2" style="margin-top:14px">
+    <section class="card"><h2>Active benchmark bets</h2><div id="bets"></div></section>
+    <section class="card"><h2>Leaderboard + confidence caveats</h2><div id="leaderboard"></div><ul id="caveats"></ul></section>
+    <section class="card"><h2>Run history timeline</h2><div id="timeline"></div></section>
+    <section class="card"><h2>Artifact tracker</h2><div id="artifacts"></div></section>
+    <section class="card"><h2>Blockers / owners / ETA</h2><div id="blockers"></div></section>
+    <section class="card"><h2>Cron + agent status (ABL)</h2><div id="cron"></div></section>
+  </div>
+  <section class="card" style="margin-top:12px"><h2>Latest report excerpt</h2><pre id="report"></pre></section>
+  <script>
+    const fmt = (d)=> d ? new Date(d).toISOString().replace('T',' ').replace('.000Z',' UTC') : 'n/a';
+    const statusClass = (s)=> /pass|ok/i.test(s)?'ok':(/unknown|monitor/i.test(s)?'warn':'bad');
+    fetch('./snapshot.json').then(r=>r.json()).then(d=>{
+      updated.textContent = `Dashboard updated: ${fmt(d.generatedAt)} | Manifest: ${fmt(d.sourceLastUpdated.manifest)} | Report: ${fmt(d.sourceLastUpdated.report)}`;
+      bets.innerHTML = d.activeBenchmarkBets.map(b=>`<div><span class="pill">${b.cluster}</span><b>${b.id}</b> — ${b.title}<br><span class="muted">Owner: ${b.owner} | Priority: ${b.priority}</span><br>${b.objective}</div><hr style="border-color:#243157">`).join('');
+      leaderboard.innerHTML = `<table><tr><th>Rank</th><th>Benchmark</th><th>Score</th><th>n</th><th>Gates</th></tr>${d.leaderboard.map((x,i)=>`<tr><td>#${i+1}</td><td>${x.benchmark}</td><td><b>${x.score.toFixed(3)}</b><br><span class='muted'>${x.metric}</span></td><td>${x.n}</td><td>${x.gates.map(g=>`<span class='${statusClass(g.status)}'>${g.name}: ${g.status}${g.actual==null?'':' ('+g.actual+')'}</span>`).join('<br>')}</td></tr>`).join('')}</table>`;
+      caveats.innerHTML = d.confidenceCaveats.map(c=>`<li>${c}</li>`).join('');
+      timeline.innerHTML = `<table><tr><th>Time (UTC)</th><th>Type</th><th>Benchmark</th><th>Detail</th></tr>${d.runTimeline.map(t=>`<tr><td>${fmt(t.ts)}</td><td>${t.type}</td><td>${t.benchmark}</td><td>${t.note}</td></tr>`).join('')}</table>`;
+      artifacts.innerHTML = `<table><tr><th>Project</th><th>Rows</th><th>Spec</th><th>Dataset SHA</th><th>Harness SHA</th></tr>${d.artifactTracker.map(a=>`<tr><td>${a.projectId}</td><td>${a.rows}</td><td>${a.spec.split('/').pop()}</td><td><code>${a.datasetSha256.slice(0,12)}…</code></td><td><code>${a.harnessSha256.slice(0,12)}…</code></td></tr>`).join('')}</table>`;
+      blockers.innerHTML = `<table><tr><th>Severity</th><th>Blocker</th><th>Owner</th><th>ETA</th><th>Status</th></tr>${d.blockers.map(b=>`<tr><td>${b.severity}</td><td>${b.title}</td><td>${b.owner}</td><td>${fmt(b.eta)}</td><td class='${statusClass(b.status)}'>${b.status}</td></tr>`).join('')}</table>`;
+      cron.innerHTML = `<table><tr><th>Job</th><th>Channel</th><th>Next Run</th><th>State</th></tr>${d.cronStatus.map(c=>`<tr><td>${c.name}</td><td class='muted'>${c.channel}</td><td>${fmt(c.nextRunAtMs)}</td><td class='${statusClass(c.lastStatus)}'>${c.lastStatus}</td></tr>`).join('')}</table>`;
+      report.textContent = d.reportPreview;
+    }).catch(e=>{document.body.innerHTML='<pre>Failed loading snapshot.json\n'+e+'</pre>'})
+  </script>
+</body>
+</html>

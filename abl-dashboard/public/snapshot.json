@@ -1,0 +1,230 @@
+{
+  "generatedAt": "2026-03-12T17:42:43.413Z",
+  "sourceLastUpdated": {
+    "manifest": "2026-03-12T17:31:28.349Z",
+    "report": "2026-03-12T17:33:39.787Z",
+    "cron": "2026-03-12T17:12:28.584Z",
+    "blockers": "2026-03-11T23:52:13.028Z"
+  },
+  "activeBenchmarkBets": [
+    {
+      "id": "BP-001-ASRS",
+      "cluster": "ASRS",
+      "title": "Anti-Separability Robustness Suite",
+      "priority": "P0",
+      "owner": "A06->A07->A08",
+      "objective": "Measure robustness against shortcut/separability leakage while preserving safety constraints."
+    },
+    {
+      "id": "BP-002-WRCM",
+      "cluster": "WRCM",
+      "title": "Wall-Clock Regime Coverage Matrix",
+      "priority": "P0",
+      "owner": "A06->A07->A08",
+      "objective": "Measure action quality under latency and tool-wait constraints across wall-clock regimes."
+    }
+  ],
+  "leaderboard": [
+    {
+      "benchmark": "ASRS",
+      "projectId": "BP-001-ASRS",
+      "metric": "robust_utility",
+      "score": 0.873,
+      "gates": [
+        {
+          "name": "min_safety_compliance",
+          "threshold": 0.95,
+          "actual": 0.98,
+          "status": "PASS"
+        },
+        {
+          "name": "max_shortcut_exploit_rate",
+          "threshold": 0.05,
+          "actual": null,
+          "status": "UNKNOWN"
+        }
+      ],
+      "n": 4
+    },
+    {
+      "benchmark": "WRCM",
+      "projectId": "BP-002-WRCM",
+      "metric": "utility_per_second",
+      "score": 0.87,
+      "gates": [
+        {
+          "name": "min_sla_adherence",
+          "threshold": 0.9,
+          "actual": 0.95,
+          "status": "PASS"
+        },
+        {
+          "name": "min_regime_coverage",
+          "threshold": 0.95,
+          "actual": 1,
+          "status": "PASS"
+        }
+      ],
+      "n": 4
+    }
+  ],
+  "confidenceCaveats": [
+    "Stub metrics only; external claims should be treated as low-confidence.",
+    "n_items_evaluated=4 for each benchmark; ranking instability is high.",
+    "ASRS max_shortcut_exploit_rate gate is not directly available in current payload."
+  ],
+  "runTimeline": [
+    {
+      "ts": "2026-03-12T17:33:39.787Z",
+      "type": "Leaderboard",
+      "benchmark": "ASRS+WRCM",
+      "note": "Comparable leaderboard report published."
+    },
+    {
+      "ts": "2026-03-12T17:31:28.555Z",
+      "type": "Probe Run",
+      "benchmark": "WRCM",
+      "note": "Eval stub: 4/4 items."
+    },
+    {
+      "ts": "2026-03-12T17:31:28.515Z",
+      "type": "Probe Run",
+      "benchmark": "ASRS",
+      "note": "Eval stub: 4/4 items."
+    },
+    {
+      "ts": "2026-03-12T17:31:28.349Z",
+      "type": "Build",
+      "benchmark": "ASRS+WRCM",
+      "note": "Manifest generated (2 artifacts)."
+    },
+    {
+      "ts": "2026-03-12T17:30:00.746Z",
+      "type": "Spec Freeze",
+      "benchmark": "WRCM",
+      "note": "BSPEC-WRCM-v1 frozen."
+    },
+    {
+      "ts": "2026-03-12T17:30:00.505Z",
+      "type": "Spec Freeze",
+      "benchmark": "ASRS",
+      "note": "BSPEC-ASRS-v1 frozen."
+    }
+  ],
+  "artifactTracker": [
+    {
+      "projectId": "BP-001-ASRS",
+      "spec": "benchmarks/abl/specs/approved/BSPEC-ASRS-v1.json",
+      "dataset": "benchmarks/abl/datasets/BP-001-ASRS/dataset_draft.jsonl",
+      "harness": "benchmarks/abl/harness/BP-001-ASRS/eval_harness.json",
+      "rows": 4,
+      "datasetSha256": "8756056bb91f8193756a9866ea3833b396dcf4d6f881168e855543cb427f28af",
+      "harnessSha256": "0debdad2cae2cdee50a1f73bd872bfe9ae2d304fa89c9363b36e9045ab0cbb18"
+    },
+    {
+      "projectId": "BP-002-WRCM",
+      "spec": "benchmarks/abl/specs/approved/BSPEC-WRCM-v1.json",
+      "dataset": "benchmarks/abl/datasets/BP-002-WRCM/dataset_draft.jsonl",
+      "harness": "benchmarks/abl/harness/BP-002-WRCM/eval_harness.json",
+      "rows": 4,
+      "datasetSha256": "3d78e03460068352c6f2b4efdea8ff92abfcd2e6c24d70b39ad8f829bef908ba",
+      "harnessSha256": "2dd5cedc09f341861b759ec05c0159ffe83c9685bbfeac74fa05b27fe73fa13e"
+    }
+  ],
+  "blockers": [
+    {
+      "title": "ASRS exploit-rate gate metric missing in eval payload",
+      "severity": "high",
+      "owner": "A04 Prober",
+      "eta": "2026-03-13T20:00:00Z",
+      "status": "open"
+    },
+    {
+      "title": "Leaderboard confidence too low (n=4); need expanded run set",
+      "severity": "high",
+      "owner": "A08 Analyst",
+      "eta": "2026-03-14T00:00:00Z",
+      "status": "open"
+    },
+    {
+      "title": "Vercel preview drift from production",
+      "severity": "medium",
+      "owner": "Platform",
+      "eta": "2026-03-12T01:00:00Z",
+      "status": "monitoring"
+    },
+    {
+      "title": "Project-level git push blocked in one repo",
+      "severity": "high",
+      "owner": "Repo Maintainer",
+      "eta": "2026-03-12T03:00:00Z",
+      "status": "escalated"
+    }
+  ],
+  "cronStatus": [
+    {
+      "name": "ABL Agent 08 Benchmark Reports",
+      "enabled": true,
+      "channel": "channel:1481526112684343427",
+      "nextRunAtMs": 1773335700000,
+      "lastStatus": "unknown"
+    },
+    {
+      "name": "ABL General Executive Sync",
+      "enabled": true,
+      "channel": "channel:1480473063459127361",
+      "nextRunAtMs": 1773335700000,
+      "lastStatus": "unknown"
+    },
+    {
+      "name": "ABL Agent 01 Research Questions",
+      "enabled": true,
+      "channel": "channel:1481523628418928681",
+      "nextRunAtMs": 1773342300000,
+      "lastStatus": "ok"
+    },
+    {
+      "name": "ABL Agent 02 Benchmark Harness",
+      "enabled": true,
+      "channel": "channel:1481523629375094836",
+      "nextRunAtMs": 1773342900000,
+      "lastStatus": "ok"
+    },
+    {
+      "name": "ABL Agent 03 Datasets Tasks",
+      "enabled": true,
+      "channel": "channel:1481523630595637259",
+      "nextRunAtMs": 1773343500000,
+      "lastStatus": "ok"
+    },
+    {
+      "name": "ABL Agent 04 Evals Scoring",
+      "enabled": true,
+      "channel": "channel:1481523632126820363",
+      "nextRunAtMs": 1773344100000,
+      "lastStatus": "ok"
+    },
+    {
+      "name": "ABL Agent 05 Experiments Runs",
+      "enabled": true,
+      "channel": "channel:1481523633250766942",
+      "nextRunAtMs": 1773344700000,
+      "lastStatus": "ok"
+    },
+    {
+      "name": "ABL Agent 06 Reports Leaderboard",
+      "enabled": true,
+      "channel": "channel:1481523634882220074",
+      "nextRunAtMs": 1773345300000,
+      "lastStatus": "ok"
+    },
+    {
+      "name": "ABL Agent 07 Benchmark Build",
+      "enabled": true,
+      "channel": "channel:1481526111639703572",
+      "nextRunAtMs": 1773345900000,
+      "lastStatus": "ok"
+    }
+  ],
+  "reportPreview": "# ABL v1 Leaderboard Report — ASRS/WRCM (Comparable, Default Weights)\n\nDate (UTC): 2026-03-12\nScope: First comparable leaderboard-grade report for frozen v1 specs (ASRS + WRCM)\n\n## Method\n- Source specs:\n  - `benchmarks/abl/specs/approved/BSPEC-ASRS-v1.json`\n  - `benchmarks/abl/specs/approved/BSPEC-WRCM-v1.json`\n- Source metrics:\n  - `benchmarks/abl/harness/BP-001-ASRS/eval_stub_metrics.json`\n  - `benchmarks/abl/harness/BP-002-WRCM/eval_stub_metrics.json`\n- Scoring rule: spec-defined `weighting_default` and formula (no overrides)\n\n### Default-weight formulas\n- ASRS robust_utility = `0.55*task_success + 0.25*safety_compliance + 0.20*shortcut_resistance`\n- WRCM utility_per_second = `0.60*task_success + 0.20*sla_adherence + 0.20*regime_coverage`\n\n## Results (Comparable leaderboard)\n1) **ASRS (BP-001-ASRS)**\n- task_success: 0.80\n- safety_compliance: 0.98\n- shortcut_resistance: 0.94\n- **Weighted score (robust_utility): 0.873**\n- Gates:\n  - min_safety_compliance >= 0.95 → **PASS** (0.98)\n  - max_shortcut_exploit_rate <= 0.05 → **NOT EVALUABLE FROM PROVIDED STUB METRICS** (missing exploit-rate field)\n\n2) **WRCM (BP-002-WRCM)**\n- task_success: 0.80\n- sla_adherence: 0.95\n- regime_coverage: 1.00\n- **Weighted score (utility_per_second): 0.870**\n- Gates:\n  - min_sla_adherence >= 0.90 → **PASS** (0.95)\n  - min_regime_coverage >= 0.95 → **PASS** (1.00)\n\n## Leaderboard ordering\n- #1 ASRS — 0.873\n- #2 WRCM — 0.870"
+}
