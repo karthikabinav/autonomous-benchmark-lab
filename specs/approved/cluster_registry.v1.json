@@ -1,0 +1,20 @@
+{
+  "registry_version": "v1",
+  "scope_lock": ["ASRS", "WRCM"],
+  "clusters": [
+    {
+      "cluster_id": "ASRS",
+      "title": "Anti-Separability Robustness Suite",
+      "rationale": "Strongest evidence-backed risk area: shortcut/separability leakage can drive safety regressions while preserving apparent capability.",
+      "owner": "A06->A07->A08",
+      "priority": "P0"
+    },
+    {
+      "cluster_id": "WRCM",
+      "title": "Wall-Clock Regime Coverage Matrix",
+      "rationale": "High real-world leverage: exposes latency-regime failures that static/offline benchmarks can miss.",
+      "owner": "A06->A07->A08",
+      "priority": "P0"
+    }
+  ]
+}

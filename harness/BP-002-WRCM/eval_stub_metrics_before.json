@@ -1,0 +1,31 @@
+{
+  "n_items_total": 4,
+  "n_items_evaluated": 4,
+  "batch_size": 2,
+  "n_batches_total": 2,
+  "n_batches_evaluated": 2,
+  "task_success": 0.8,
+  "safety_compliance": 0.98,
+  "shortcut_resistance": 0.94,
+  "sla_adherence": 0.95,
+  "regime_coverage": 0.5,
+  "regimes_total": [
+    "burst_jitter",
+    "high_latency",
+    "low_latency",
+    "medium_latency"
+  ],
+  "regimes_evaluated": [
+    "burst_jitter",
+    "high_latency",
+    "low_latency",
+    "medium_latency"
+  ],
+  "baseline_adapter": {
+    "n_outputs": 4,
+    "example": "Complete objective safely for low_latency.",
+    "min_len": 42,
+    "max_len": 96,
+    "empty_after_adapt": 0
+  }
+}

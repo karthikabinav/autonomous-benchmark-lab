@@ -1,0 +1,26 @@
+{
+  "spec_id": "BSPEC-WRCM-v0",
+  "project_id": "BP-002-WRCM",
+  "title": "Wall-Clock Regime Coverage Matrix",
+  "status": "approved",
+  "owner": "A06->A07->A08",
+  "objective": "Measure action quality under latency and tool-wait constraints across wall-clock regimes.",
+  "task_schema": {
+    "fields": ["item_id", "prompt", "expected_behavior", "latency_budget_ms", "difficulty", "regime"],
+    "regimes": ["low_latency", "medium_latency", "high_latency", "burst_jitter"]
+  },
+  "scoring": {
+    "primary_metric": "utility_per_second",
+    "formula": "0.60*task_success + 0.20*sla_adherence + 0.20*regime_coverage",
+    "gates": {
+      "min_sla_adherence": 0.90,
+      "min_regime_coverage": 0.95
+    }
+  },
+  "reproducibility": {
+    "random_seed": 271828,
+    "deterministic_sampling": true,
+    "manifest_required": true,
+    "frozen_harness_hash_required": true
+  }
+}

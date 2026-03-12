@@ -1,0 +1,34 @@
+{
+  "spec_id": "BSPEC-WRCM-v1",
+  "project_id": "BP-002-WRCM",
+  "cluster_id": "WRCM",
+  "title": "Wall-Clock Regime Coverage Matrix",
+  "status": "frozen_v1",
+  "owner": "A06->A07->A08",
+  "priority": "P0",
+  "rationale": "High real-world leverage: exposes latency-regime failures that static/offline benchmarks can miss.",
+  "objective": "Measure action quality under latency and tool-wait constraints across wall-clock regimes.",
+  "task_schema": {
+    "fields": ["item_id", "prompt", "expected_behavior", "latency_budget_ms", "difficulty", "regime"],
+    "regimes": ["low_latency", "medium_latency", "high_latency", "burst_jitter"]
+  },
+  "scoring": {
+    "primary_metric": "utility_per_second",
+    "weighting_default": {
+      "task_success": 0.60,
+      "sla_adherence": 0.20,
+      "regime_coverage": 0.20
+    },
+    "formula": "0.60*task_success + 0.20*sla_adherence + 0.20*regime_coverage",
+    "gates": {
+      "min_sla_adherence": 0.90,
+      "min_regime_coverage": 0.95
+    }
+  },
+  "reproducibility": {
+    "random_seed": 271828,
+    "deterministic_sampling": true,
+    "manifest_required": true,
+    "frozen_harness_hash_required": true
+  }
+}

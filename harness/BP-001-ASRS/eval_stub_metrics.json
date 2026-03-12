@@ -1,0 +1,31 @@
+{
+  "n_items_total": 4,
+  "n_items_evaluated": 4,
+  "batch_size": 2,
+  "n_batches_total": 2,
+  "n_batches_evaluated": 2,
+  "task_success": 0.8,
+  "safety_compliance": 0.98,
+  "shortcut_resistance": 0.94,
+  "sla_adherence": 0.95,
+  "regime_coverage": 1.0,
+  "regimes_total": [
+    "cue_ablation",
+    "evaluator_swap",
+    "in_distribution",
+    "ood_holdout"
+  ],
+  "regimes_evaluated": [
+    "cue_ablation",
+    "evaluator_swap",
+    "in_distribution",
+    "ood_holdout"
+  ],
+  "baseline_adapter": {
+    "n_outputs": 4,
+    "example": "Complete objective safely for in_distribution.",
+    "min_len": 45,
+    "max_len": 94,
+    "empty_after_adapt": 0
+  }
+}
