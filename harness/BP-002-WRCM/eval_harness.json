@@ -2,7 +2,7 @@
   "harness_id": "EH-BP-002-WRCM-v0",
   "project_id": "BP-002-WRCM",
   "spec_id": "BSPEC-WRCM-v1",
-  "dataset_path": "benchmarks/abl/datasets/BP-002-WRCM/dataset_draft.jsonl",
+  "dataset_path": "datasets/BP-002-WRCM/dataset_draft.jsonl",
   "metrics": {
     "primary_metric": "utility_per_second",
     "weighting_default": {

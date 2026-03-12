@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-manifest = json.loads((ROOT / "benchmarks" / "abl" / "build_manifest.json").read_text())
+manifest = json.loads((ROOT / "build_manifest.json").read_text())
 assert len(manifest["artifacts"]) >= 2
 
 for a in manifest["artifacts"]:

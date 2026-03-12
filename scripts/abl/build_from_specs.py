@@ -6,9 +6,9 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SPECS_DIR = ROOT / "benchmarks" / "abl" / "specs" / "approved"
-DATASETS_DIR = ROOT / "benchmarks" / "abl" / "datasets"
-HARNESS_DIR = ROOT / "benchmarks" / "abl" / "harness"
+SPECS_DIR = ROOT / "specs" / "approved"
+DATASETS_DIR = ROOT / "datasets"
+HARNESS_DIR = ROOT / "harness"
 
 
 def make_dataset_rows(spec):
@@ -89,7 +89,7 @@ def main():
         manifest["generated_from"].append(os.path.relpath(spec_path, ROOT))
         manifest["artifacts"].append(build_one(spec_path))
 
-    out_path = ROOT / "benchmarks" / "abl" / "build_manifest.json"
+    out_path = ROOT / "build_manifest.json"
     out_path.write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Wrote {out_path}")
 

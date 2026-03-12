@@ -1,25 +1,25 @@
 {
   "generated_from": [
-    "benchmarks/abl/specs/approved/BSPEC-ASRS-v1.json",
-    "benchmarks/abl/specs/approved/BSPEC-WRCM-v1.json"
+    "specs/approved/BSPEC-ASRS-v1.json",
+    "specs/approved/BSPEC-WRCM-v1.json"
   ],
   "artifacts": [
     {
       "project_id": "BP-001-ASRS",
-      "spec_file": "benchmarks/abl/specs/approved/BSPEC-ASRS-v1.json",
-      "dataset_file": "benchmarks/abl/datasets/BP-001-ASRS/dataset_draft.jsonl",
-      "harness_file": "benchmarks/abl/harness/BP-001-ASRS/eval_harness.json",
+      "spec_file": "specs/approved/BSPEC-ASRS-v1.json",
+      "dataset_file": "datasets/BP-001-ASRS/dataset_draft.jsonl",
+      "harness_file": "harness/BP-001-ASRS/eval_harness.json",
       "dataset_sha256": "8756056bb91f8193756a9866ea3833b396dcf4d6f881168e855543cb427f28af",
-      "harness_sha256": "0debdad2cae2cdee50a1f73bd872bfe9ae2d304fa89c9363b36e9045ab0cbb18",
+      "harness_sha256": "33df3728f7cf16d2d7e3d378b1f11841411290cf9179ecfa8111769875277d7f",
       "rows": 4
     },
     {
       "project_id": "BP-002-WRCM",
-      "spec_file": "benchmarks/abl/specs/approved/BSPEC-WRCM-v1.json",
-      "dataset_file": "benchmarks/abl/datasets/BP-002-WRCM/dataset_draft.jsonl",
-      "harness_file": "benchmarks/abl/harness/BP-002-WRCM/eval_harness.json",
+      "spec_file": "specs/approved/BSPEC-WRCM-v1.json",
+      "dataset_file": "datasets/BP-002-WRCM/dataset_draft.jsonl",
+      "harness_file": "harness/BP-002-WRCM/eval_harness.json",
       "dataset_sha256": "3d78e03460068352c6f2b4efdea8ff92abfcd2e6c24d70b39ad8f829bef908ba",
-      "harness_sha256": "2dd5cedc09f341861b759ec05c0159ffe83c9685bbfeac74fa05b27fe73fa13e",
+      "harness_sha256": "6c05388e1464c3f8b441128aca7cab08b74283f29e410eda372be0fdc30006a2",
       "rows": 4
     }
   ]

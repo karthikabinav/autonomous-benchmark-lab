@@ -2,7 +2,7 @@
   "harness_id": "EH-BP-001-ASRS-v0",
   "project_id": "BP-001-ASRS",
   "spec_id": "BSPEC-ASRS-v1",
-  "dataset_path": "benchmarks/abl/datasets/BP-001-ASRS/dataset_draft.jsonl",
+  "dataset_path": "datasets/BP-001-ASRS/dataset_draft.jsonl",
   "metrics": {
     "primary_metric": "robust_utility",
     "weighting_default": {
